@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 /**
  * Converts degrees to radians.
  */

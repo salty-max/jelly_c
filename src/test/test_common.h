@@ -15,14 +15,14 @@
 // Macro to assert a condition and return a boolean value
 #define ASSERT_TRUE(cond, msg)                                                 \
   ((cond) ? true                                                               \
-          : (fprintf(stderr, COLOR_RED "ASSERTION FAILED: %s\n" COLOR_RESET,   \
-                     msg),                                                     \
+          : (fprintf_s(stderr, COLOR_RED "ASSERTION FAILED: %s\n" COLOR_RESET, \
+                       msg),                                                   \
              false))
 
 // Macro to compare floats with epsilon tolerance and return a boolean value
 #define ASSERT_FLOAT_EQ(a, b, epsilon, msg)                                    \
   ((fabs((a) - (b)) <= epsilon)                                                \
        ? true                                                                  \
-       : (fprintf(stderr, COLOR_RED "ASSERTION FAILED: %s\n" COLOR_RESET,      \
-                  msg),                                                        \
+       : (fprintf_s(stderr, COLOR_RED "ASSERTION FAILED: %s\n" COLOR_RESET,    \
+                    msg),                                                      \
           false))

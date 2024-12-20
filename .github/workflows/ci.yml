@@ -61,3 +61,19 @@ jobs:
     # Build the project
     - name: Build
       run: cmake --build build --config Release
+
+    # Run tests
+    - name: Run Tests
+      run: |
+        cd build/bin
+        ./test_mat || exit 1
+        ./test_vec || exit 1
+      if: runner.os != 'Windows'
+
+    # Run tests on Windows
+    - name: Run Tests (Windows)
+      run: |
+        cd build\\bin\\Release
+        ./test_mat.exe || exit 1
+        ./test_vec.exe || exit 1
+      if: runner.os == 'Windows'

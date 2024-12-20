@@ -2,9 +2,9 @@
 
 #include <SDL2/SDL.h>
 
-#include "../math/vec.h"
-#include "../math/mat.h"
-#include "../types.h"
+#include "../../math/vec.h"
+#include "../../math/mat.h"
+#include "../../types.h"
 
 /**
  * Represents the state of the renderer.

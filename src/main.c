@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "engine/global.h"
+#include "math/vec.h"
 
 int main(int argc, char *argv[]) {
   render_init();

@@ -20,15 +20,20 @@ FetchContent_MakeAvailable(SDL2)
 add_executable(jelly 
     src/main.c 
     src/gl.c
+    src/math/mat.c
+    src/math/vec.c
     src/engine/global.c
-    src/engine/math/mat.c
-    src/engine/math/vec.c
     src/engine/render/render.c
     src/engine/render/render_init.c
 )
 
+add_executable(test_mat src/test/test_mat.c src/math/mat.c)
+add_executable(test_vec src/test/test_vec.c src/math/vec.c)
+
 # Add include directories
 target_include_directories(jelly PRIVATE src include ${SDL2_SOURCE_DIR}/include)
+target_include_directories(test_mat PRIVATE src include)
+target_include_directories(test_vec PRIVATE src include)
 
 if(WIN32)
     # Windows: Link SDL2 libraries only
@@ -36,6 +41,8 @@ if(WIN32)
 else()
     # Non-Windows: Link SDL2 and Math libraries
     target_link_libraries(jelly PRIVATE SDL2::SDL2 SDL2::SDL2main m)
+    target_link_libraries(test_mat PRIVATE m)
+    target_link_libraries(test_vec PRIVATE m)
 endif()
 
 # # Copy shaders to build/bin

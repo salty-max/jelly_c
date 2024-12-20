@@ -2,7 +2,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "../util.h"
+#include "../../util.h"
 #include "../global.h"
 
 #include "render.h"

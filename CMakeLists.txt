@@ -30,8 +30,13 @@ add_executable(jelly
 # Add include directories
 target_include_directories(jelly PRIVATE src include ${SDL2_SOURCE_DIR}/include)
 
-# Link SDL2 libraries
-target_link_libraries(jelly PRIVATE SDL2::SDL2 SDL2::SDL2main m)
+if(WIN32)
+    # Windows: Link SDL2 libraries only
+    target_link_libraries(jelly PRIVATE SDL2::SDL2 SDL2::SDL2main)
+else()
+    # Non-Windows: Link SDL2 and Math libraries
+    target_link_libraries(jelly PRIVATE SDL2::SDL2 SDL2::SDL2main m)
+endif()
 
 # # Copy shaders to build/bin
 # add_custom_command(

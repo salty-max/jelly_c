@@ -3,7 +3,9 @@
     "gl.h": "c",
     "stdio.h": "c",
     "sdl.h": "c",
-    "sdl_opengl.h": "c"
+    "sdl_opengl.h": "c",
+    "sdl_stdinc.h": "c",
+    "global.h": "c"
   },
   "C_Cpp.codeAnalysis.exclude": {
     "**/include": true,

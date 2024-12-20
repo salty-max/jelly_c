@@ -20,6 +20,11 @@ FetchContent_MakeAvailable(SDL2)
 add_executable(jelly 
     src/main.c 
     src/gl.c
+    src/engine/global.c
+    src/engine/math/mat.c
+    src/engine/math/vec.c
+    src/engine/render/render.c
+    src/engine/render/render_init.c
 )
 
 # Add include directories

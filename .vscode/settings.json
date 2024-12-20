@@ -4,5 +4,10 @@
     "stdio.h": "c",
     "sdl.h": "c",
     "sdl_opengl.h": "c"
+  },
+  "C_Cpp.codeAnalysis.exclude": {
+    "**/include": true,
+    "**/lib": true,
+    "**/build": true
   }
 }

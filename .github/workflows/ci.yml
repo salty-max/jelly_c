@@ -1,0 +1,63 @@
+name: CI
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: ${{ matrix.platform.name }} ${{ matrix.config.name }}
+    runs-on: ${{ matrix.platform.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+        - { name: Windows VS2019, os: windows-2019 }
+        - { name: Windows VS2022, os: windows-2022 }
+        - { name: Linux GCC,      os: ubuntu-latest }
+        - { name: Linux Clang,    os: ubuntu-latest, flags: -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ }
+        - { name: macOS,          os: macos-latest }
+        config:
+        - { name: Shared, flags: -DBUILD_SHARED_LIBS=TRUE }
+        - { name: Static, flags: -DBUILD_SHARED_LIBS=FALSE }
+
+    steps:
+    # Checkout the repository
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    # Install dependencies (Linux)
+    - name: Install Linux Dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libxrandr-dev libxcursor-dev libudev-dev libopenal-dev \
+          libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev \
+          libfreetype-dev libfreetype6 libfreetype6-dev \
+          cmake gcc g++ make
+
+    # Install dependencies (macOS)
+    - name: Install macOS Dependencies
+      if: runner.os == 'macOS'
+      run: |
+        brew update
+        brew install cmake glfw sdl2
+
+    # Install dependencies (Windows)
+    - name: Install Windows Dependencies
+      if: runner.os == 'Windows'
+      run: |
+        choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"' --yes
+        choco install mingw --yes
+
+    # Configure the project using CMake
+    - name: Configure
+      run: cmake -B build ${{ matrix.platform.flags }} ${{ matrix.config.flags }}
+
+    # Build the project
+    - name: Build
+      run: cmake --build build --config Release

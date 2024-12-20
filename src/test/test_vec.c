@@ -183,7 +183,7 @@ int main() {
   if (all_tests_passed) {
     printf(COLOR_GREEN "All vec.c tests passed!\n" COLOR_RESET);
   } else {
-    fprintf_s(stderr, COLOR_RED "Some vec.c tests failed.\n" COLOR_RESET);
+    fprintf(stderr, COLOR_RED "Some vec.c tests failed.\n" COLOR_RESET);
   }
 
   return all_tests_passed ? 0 : 1;

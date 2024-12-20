@@ -23,8 +23,10 @@ add_executable(jelly
     src/math/mat.c
     src/math/vec.c
     src/engine/global.c
+    src/engine/io/io.c
     src/engine/render/render.c
     src/engine/render/render_init.c
+    src/engine/render/render_util.c
 )
 
 add_executable(test_mat src/test/test_mat.c src/math/mat.c)
@@ -45,9 +47,9 @@ else()
     target_link_libraries(test_vec PRIVATE m)
 endif()
 
-# # Copy shaders to build/bin
-# add_custom_command(
-#     TARGET jelly POST_BUILD
-#     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/shaders $<TARGET_FILE_DIR:jelly>/shaders
-#     COMMENT "Copying shaders to build directory"
-# )
+# Copy shaders to build/bin
+add_custom_command(
+    TARGET jelly POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/src/shaders $<TARGET_FILE_DIR:jelly>/shaders
+    COMMENT "Copying shaders to build directory"
+)

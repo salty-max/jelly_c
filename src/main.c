@@ -25,8 +25,9 @@ int main(int argc, char *argv[]) {
 
     render_begin();
 
-    render_quad(vec2(global.render.width / 2, global.render.height / 2),
-                vec2(100, 100), vec4(1, 0, 0, 1));
+    render_quad(vec2(global.render.width * 0.5, global.render.height * 0.5),
+                vec2(100, 100),
+                vec4(148.0f / 255.0f, 226.0f / 255.0f, 213.0f / 255.0f, 1));
 
     render_end();
   }

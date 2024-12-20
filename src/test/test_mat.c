@@ -69,7 +69,7 @@ bool test_mat4_rotate_x() {
   bool passed = true;
 
   // Test rotation about the x-axis
-  Mat4 rotation = mat4_rotate_x(M_PI / 4.0f);
+  Mat4 rotation = mat4_rotation_x(M_PI / 4.0f);
 
   passed &= ASSERT_FLOAT_EQ(rotation.m[1][1], cosf(M_PI / 4.0f), 1e-6,
                             "mat4_rotate_x: Incorrect m[1][1]");
@@ -94,7 +94,7 @@ bool test_mat4_rotate_y() {
   bool passed = true;
 
   // Test rotation about the y-axis
-  Mat4 rotation = mat4_rotate_y(M_PI / 4.0f);
+  Mat4 rotation = mat4_rotation_y(M_PI / 4.0f);
 
   passed &= ASSERT_FLOAT_EQ(rotation.m[0][0], cosf(M_PI / 4.0f), 1e-6,
                             "mat4_rotate_y: Incorrect m[0][0]");
@@ -119,7 +119,7 @@ bool test_mat4_rotate_z() {
   bool passed = true;
 
   // Test rotation about the z-axis
-  Mat4 rotation = mat4_rotate_z(M_PI / 4.0f);
+  Mat4 rotation = mat4_rotation_z(M_PI / 4.0f);
 
   passed &= ASSERT_FLOAT_EQ(rotation.m[0][0], cosf(M_PI / 4.0f), 1e-6,
                             "mat4_rotate_z: Incorrect m[0][0]");
@@ -142,7 +142,7 @@ bool test_mat4_rotate_z() {
 bool test_mat4_translate() {
   printf(COLOR_YELLOW "Running test: mat4_translate...\n" COLOR_RESET);
   bool passed = true;
-  Mat4 translation = mat4_translate(3.0f, 4.0f, 5.0f);
+  Mat4 translation = mat4_translation(3.0f, 4.0f, 5.0f);
   passed &= ASSERT_FLOAT_EQ(translation.m[3][0], 3.0f, 1e-6,
                             "mat4_translate: Incorrect x translation");
   passed &= ASSERT_FLOAT_EQ(translation.m[3][1], 4.0f, 1e-6,
@@ -158,7 +158,7 @@ bool test_mat4_translate() {
 bool test_mat4_scale() {
   printf(COLOR_YELLOW "Running test: mat4_scale...\n" COLOR_RESET);
   bool passed = true;
-  Mat4 scale = mat4_scale(2.0f, 3.0f, 4.0f);
+  Mat4 scale = mat4_scaling(2.0f, 3.0f, 4.0f);
   passed &= ASSERT_FLOAT_EQ(scale.m[0][0], 2.0f, 1e-6,
                             "mat4_scale: Incorrect x scale");
   passed &= ASSERT_FLOAT_EQ(scale.m[1][1], 3.0f, 1e-6,
@@ -171,12 +171,45 @@ bool test_mat4_scale() {
   return passed;
 }
 
+bool test_mat4_scale_aniso() {
+  printf(COLOR_YELLOW "Running test: mat4_scale_aniso...\n" COLOR_RESET);
+  bool passed = true;
+
+  Mat4 mat = mat4_identity();
+  mat4_scale_aniso(&mat, 2.0f, 3.0f, 4.0f);
+
+  // Validate the scaling was applied correctly
+  passed &= ASSERT_FLOAT_EQ(mat.m[0][0], 2.0f, 1e-6,
+                            "mat4_scale_aniso: Incorrect x scale");
+  passed &= ASSERT_FLOAT_EQ(mat.m[1][1], 3.0f, 1e-6,
+                            "mat4_scale_aniso: Incorrect y scale");
+  passed &= ASSERT_FLOAT_EQ(mat.m[2][2], 4.0f, 1e-6,
+                            "mat4_scale_aniso: Incorrect z scale");
+
+  // Validate other elements remain unchanged (identity elements)
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (i != j) {
+        passed &=
+            ASSERT_FLOAT_EQ(mat.m[i][j], 0.0f, 1e-6,
+                            "mat4_scale_aniso: Off-diagonal element modified");
+      }
+    }
+  }
+
+  if (passed) {
+    printf(COLOR_GREEN "Test passed: mat4_scale_aniso\n" COLOR_RESET);
+  }
+  return passed;
+}
+
 bool test_mat4_mul() {
   printf(COLOR_YELLOW "Running test: mat4_mul...\n" COLOR_RESET);
   bool passed = true;
   Mat4 a = mat4_identity();
-  Mat4 b = mat4_translate(1.0f, 2.0f, 3.0f);
-  Mat4 result = mat4_mul(a, b);
+  Mat4 b = mat4_translation(1.0f, 2.0f, 3.0f);
+  Mat4 result;
+  mat4_mul(&result, &a, &b);
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       passed &=
@@ -202,12 +235,13 @@ int main() {
   all_tests_passed &= test_mat4_rotate_z();
   all_tests_passed &= test_mat4_translate();
   all_tests_passed &= test_mat4_scale();
+  all_tests_passed &= test_mat4_scale_aniso();
   all_tests_passed &= test_mat4_mul();
 
   if (all_tests_passed) {
     printf(COLOR_GREEN "All mat.c tests passed!\n" COLOR_RESET);
   } else {
-    fprintf_s(stderr, COLOR_RED "Some mat.c tests failed.\n" COLOR_RESET);
+    fprintf(stderr, COLOR_RED "Some mat.c tests failed.\n" COLOR_RESET);
   }
 
   return all_tests_passed ? 0 : 1;

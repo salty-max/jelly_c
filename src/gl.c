@@ -1000,7 +1000,7 @@ static void GLAD_API_PTR glad_debug_impl_glDrawElementsInstanced(
 PFNGLDRAWELEMENTSINSTANCEDPROC glad_debug_glDrawElementsInstanced =
     glad_debug_impl_glDrawElementsInstanced;
 PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC
-    glad_glDrawElementsInstancedBaseVertex = NULL;
+glad_glDrawElementsInstancedBaseVertex = NULL;
 static void GLAD_API_PTR glad_debug_impl_glDrawElementsInstancedBaseVertex(
     GLenum mode, GLsizei count, GLenum type, const void *indices,
     GLsizei instancecount, GLint basevertex) {
@@ -1014,8 +1014,8 @@ static void GLAD_API_PTR glad_debug_impl_glDrawElementsInstancedBaseVertex(
                          mode, count, type, indices, instancecount, basevertex);
 }
 PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC
-    glad_debug_glDrawElementsInstancedBaseVertex =
-        glad_debug_impl_glDrawElementsInstancedBaseVertex;
+glad_debug_glDrawElementsInstancedBaseVertex =
+    glad_debug_impl_glDrawElementsInstancedBaseVertex;
 PFNGLDRAWRANGEELEMENTSPROC glad_glDrawRangeElements = NULL;
 static void GLAD_API_PTR glad_debug_impl_glDrawRangeElements(
     GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type,
@@ -1592,7 +1592,7 @@ glad_debug_impl_glGetFragDataLocation(GLuint program, const GLchar *name) {
 PFNGLGETFRAGDATALOCATIONPROC glad_debug_glGetFragDataLocation =
     glad_debug_impl_glGetFragDataLocation;
 PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC
-    glad_glGetFramebufferAttachmentParameteriv = NULL;
+glad_glGetFramebufferAttachmentParameteriv = NULL;
 static void GLAD_API_PTR glad_debug_impl_glGetFramebufferAttachmentParameteriv(
     GLenum target, GLenum attachment, GLenum pname, GLint *params) {
   _pre_call_gl_callback("glGetFramebufferAttachmentParameteriv",
@@ -1605,8 +1605,8 @@ static void GLAD_API_PTR glad_debug_impl_glGetFramebufferAttachmentParameteriv(
       attachment, pname, params);
 }
 PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC
-    glad_debug_glGetFramebufferAttachmentParameteriv =
-        glad_debug_impl_glGetFramebufferAttachmentParameteriv;
+glad_debug_glGetFramebufferAttachmentParameteriv =
+    glad_debug_impl_glGetFramebufferAttachmentParameteriv;
 PFNGLGETINTEGER64I_VPROC glad_glGetInteger64i_v = NULL;
 static void GLAD_API_PTR glad_debug_impl_glGetInteger64i_v(GLenum target,
                                                            GLuint index,
@@ -2587,8 +2587,8 @@ static void GLAD_API_PTR glad_debug_impl_glRenderbufferStorageMultisample(
                          target, samples, internalformat, width, height);
 }
 PFNGLRENDERBUFFERSTORAGEMULTISAMPLEPROC
-    glad_debug_glRenderbufferStorageMultisample =
-        glad_debug_impl_glRenderbufferStorageMultisample;
+glad_debug_glRenderbufferStorageMultisample =
+    glad_debug_impl_glRenderbufferStorageMultisample;
 PFNGLSAMPLECOVERAGEPROC glad_glSampleCoverage = NULL;
 static void GLAD_API_PTR glad_debug_impl_glSampleCoverage(GLfloat value,
                                                           GLboolean invert) {

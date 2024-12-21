@@ -20,12 +20,14 @@ FetchContent_MakeAvailable(SDL2)
 add_executable(jelly 
     src/main.c 
     src/gl.c
+    src/engine/array_list/array_list.c
     src/engine/config/config.c
     src/engine/global.c
     src/engine/input/input.c
     src/engine/io/io.c
     src/engine/math/mat.c
     src/engine/math/vec.c
+    src/engine/physics/physics.c
     src/engine/render/render.c
     src/engine/render/render_init.c
     src/engine/render/render_util.c

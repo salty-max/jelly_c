@@ -23,7 +23,7 @@ File io_file_read(const char *path) {
 
   // Determine file size
   fseek(fp, 0, SEEK_END);
-  size_t file_size = ftell(fp);
+  usize file_size = ftell(fp);
   fseek(fp, 0, SEEK_SET);
 
   if (file_size == 0) {
@@ -39,7 +39,7 @@ File io_file_read(const char *path) {
   }
 
   // Read the file into memory
-  size_t read_size = fread(data, 1, file_size, fp);
+  usize read_size = fread(data, 1, file_size, fp);
   if (read_size != file_size) {
     free(data);
     fclose(fp);
@@ -57,13 +57,13 @@ File io_file_read(const char *path) {
   return file;
 }
 
-int io_file_write(void *buffer, size_t size, const char *path) {
+int io_file_write(void *buffer, usize size, const char *path) {
   FILE *fp = fopen(path, "wb");
   if (!fp || ferror(fp)) {
     ERROR_RETURN(1, "Cannot write file: &s\n", path);
   }
 
-  size_t chunks_written = fwrite(buffer, 1, size, fp);
+  usize chunks_written = fwrite(buffer, 1, size, fp);
 
   fclose(fp);
 

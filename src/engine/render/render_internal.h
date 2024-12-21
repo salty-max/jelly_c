@@ -2,10 +2,9 @@
 
 #include <SDL2/SDL.h>
 
-#include "../../types.h"
-#include "../../math/mat.h"
-
-#include "render.h"
+#include "../types.h"
+#include "../mat.h"
+#include "../render.h"
 
 /**
  * Represents the internal state of the renderer.

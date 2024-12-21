@@ -2,11 +2,11 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
 
-#include "../../util.h"
-#include "../../math/mat.h"
+#include "../util.h"
+#include "../mat.h"
 #include "../global.h"
+#include "../render.h"
 
-#include "render.h"
 #include "render_internal.h"
 
 SDL_Window *render_init_window(u32 width, u32 height) {

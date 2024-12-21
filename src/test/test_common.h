@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "../util.h"
+#include "../engine/util.h"
 
 // ANSI color codes
 #define COLOR_RESET "\033[0m"

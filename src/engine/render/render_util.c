@@ -1,8 +1,8 @@
 #include <glad/gl.h>
 #include <stdio.h>
 
-#include "../../util.h"
-#include "../io/io.h"
+#include "../util.h"
+#include "../io.h"
 
 #include "render_internal.h"
 

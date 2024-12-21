@@ -1,7 +1,7 @@
 #include <stdbool.h>
 #include <math.h>
 
-#include "../math/mat.h"
+#include "../engine/mat.h"
 
 #include "test_common.h"
 

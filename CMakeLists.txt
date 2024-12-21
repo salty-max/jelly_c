@@ -20,17 +20,20 @@ FetchContent_MakeAvailable(SDL2)
 add_executable(jelly 
     src/main.c 
     src/gl.c
-    src/math/mat.c
-    src/math/vec.c
+    src/engine/config/config.c
     src/engine/global.c
+    src/engine/input/input.c
     src/engine/io/io.c
+    src/engine/math/mat.c
+    src/engine/math/vec.c
     src/engine/render/render.c
     src/engine/render/render_init.c
     src/engine/render/render_util.c
+    src/engine/time/time.c
 )
 
-add_executable(test_mat src/test/test_mat.c src/math/mat.c)
-add_executable(test_vec src/test/test_vec.c src/math/vec.c)
+add_executable(test_mat src/test/test_mat.c src/engine/math/mat.c)
+add_executable(test_vec src/test/test_vec.c src/engine/math/vec.c)
 
 # Add include directories
 target_include_directories(jelly PRIVATE src include ${SDL2_SOURCE_DIR}/include)

@@ -1,6 +1,8 @@
 #include <stdbool.h>
 #include <math.h>
-#include "../math/vec.h"
+
+#include "../engine/vec.h"
+
 #include "test_common.h"
 
 // Helper function to compare vectors for equality with a tolerance

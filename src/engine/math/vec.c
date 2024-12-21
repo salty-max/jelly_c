@@ -1,6 +1,6 @@
 #include <math.h>
 
-#include "vec.h"
+#include "../vec.h"
 
 Vec2 vec2(float x, float y) { return (Vec2){x, y}; }
 

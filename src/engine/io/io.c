@@ -2,10 +2,9 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "../../types.h"
-#include "../../util.h"
-
-#include "io.h"
+#include "../types.h"
+#include "../util.h"
+#include "../io.h"
 
 // 20 MiB
 #define IO_READ_CHUNK_SIZE (20 * 1024 * 1024)
@@ -58,4 +57,22 @@ File io_file_read(const char *path) {
   return file;
 }
 
-int io_file_write(void *buffer, size_t size, const char *path);
+int io_file_write(void *buffer, size_t size, const char *path) {
+  FILE *fp = fopen(path, "wb");
+  if (!fp || ferror(fp)) {
+    ERROR_RETURN(1, "Cannot write file: &s\n", path);
+  }
+
+  size_t chunks_written = fwrite(buffer, 1, size, fp);
+
+  fclose(fp);
+
+  if (chunks_written != 1) {
+    ERROR_RETURN(1,
+                 "Write error. "
+                 "Expected 1 chunk, got %zu\n",
+                 chunks_written);
+  }
+
+  return 0;
+}

@@ -1,5 +1,5 @@
 #include <math.h>
-#include "mat.h"
+#include "../mat.h"
 
 Mat4 mat4_identity() {
   Mat4 result = {0};

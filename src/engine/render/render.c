@@ -1,7 +1,8 @@
 #include <glad/gl.h>
 
 #include "../global.h"
-#include "render.h"
+#include "../render.h"
+
 #include "render_internal.h"
 
 static RenderState_Internal state = {0};
@@ -30,6 +31,8 @@ void render_shutdown(void) {
   glDeleteBuffers(1, &state.ebo_quad);
 
   SDL_GL_DeleteContext(global.render.window);
+  SDL_DestroyWindow(global.render.window);
+  SDL_Quit();
 }
 
 void render_quad(Vec2 position, Vec2 size, Vec4 color) {

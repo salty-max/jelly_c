@@ -6,7 +6,8 @@
     "sdl.h": "c",
     "sdl_opengl.h": "c",
     "sdl_stdinc.h": "c",
-    "global.h": "c"
+    "global.h": "c",
+    "random": "cpp"
   },
   "C_Cpp.codeAnalysis.exclude": {
     "**/include": true,

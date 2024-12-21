@@ -28,7 +28,7 @@ usize physics_body_create(Vec2 position, Vec2 size) {
       .acceleration = vec2_zero()};
 
   if (array_list_append(state.bodies, &body) == -1) {
-    ERROR_EXIT(-1, "Could not append body to list\n");
+    ERROR_RETURN(-1, "Could not append body to list\n");
   }
 
   return state.bodies->len - 1;
